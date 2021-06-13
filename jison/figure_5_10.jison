@@ -1,3 +1,6 @@
+// MIT License
+// Copyright (c) 2021 Luis Espino
+
 /* description: generate the DOT string to create the AST of a expression. */
 
 /* lexical grammar */
