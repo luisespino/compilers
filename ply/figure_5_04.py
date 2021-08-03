@@ -1,3 +1,6 @@
+# Figure 5.4
+# Luis Espino 2021
+
 tokens = ('DIGIT','TIMES')
 
 t_TIMES   = r'\*'

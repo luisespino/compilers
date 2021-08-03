@@ -1,3 +1,6 @@
+# Figure 5.1 
+# Luis Espino 2021
+
 tokens = ('DIGIT','PLUS','TIMES','LPAREN','RPAREN')
 
 t_PLUS    = r'\+'
