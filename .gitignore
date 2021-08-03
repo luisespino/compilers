@@ -2,3 +2,5 @@
 ply/parser.out
 ply/parsetab.py
 ply/__pycache__/parsetab.cpython-39.pyc
+ply/Graph.gv
+ply/Graph.gv.pdf
