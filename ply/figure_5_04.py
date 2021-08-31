@@ -29,7 +29,7 @@ lexer = lex.lex()
 
 def p_line(t):
     'line : t'
-    print(t[1])
+    print ("line: t, line_sin:"+"{}".format(t[1]))
 
 def p_t_f_tp(t):
     't : f tp'
