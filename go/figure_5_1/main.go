@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"parser" // copy parser folder to GOROOT
+	"parser"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
