@@ -1,0 +1,55 @@
+/* Figure 5.4 */
+
+%{
+#include <iostream>
+#include <string>
+#include <map>
+#include <cstdlib>
+
+using namespace std;
+
+int yylex(); 
+int yyerror(const char *p) { cerr << " Error!" << endl; exit(1);}
+%}
+
+%union {
+  int val; 
+  char sym;
+};
+
+%token <val> DIGIT
+%token <sym> PLUS TIMES LPAREN RPAREN N
+%type  <val> l e ep t tp f
+
+%%
+
+l: e N       	{ cout << $1 << endl; return 0; }
+
+e: t ep     	{ $$ = $2; }
+
+ep: PLUS t ep	{ $$ = $3 + $<val>0; }
+
+ep: %empty       	{ $$ = $<val>0; }
+
+t: f tp     	{ $$ = $2; }
+
+tp: TIMES f tp	{ $$ = $3 * $<val>0; }
+
+tp: %empty      	{ $$ = $<val>0; }
+
+f: 
+LPAREN e RPAREN 	{ $$ = $2; }
+| DIGIT           { $$ = $1; }
+
+
+%%
+
+int main()
+{
+	while (true)
+	{
+		cout << "> ";
+  		yyparse();	
+	}	
+  return 0;
+}
