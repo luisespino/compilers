@@ -98,7 +98,7 @@ def p_statement_assign(p):
     elif (len(dimensions) == 3):
         data += p[1] + '_face: .word '+str(dimensions[0])+'\n'
         data += p[1] + '_rows: .word '+str(dimensions[1])+'\n'
-        data += p[1] + '_cols: .word '+str(dimensions[1])+'\n'    
+        data += p[1] + '_cols: .word '+str(dimensions[2])+'\n'    
     p[0] = ('assign', p[1], p[3], dimensions)
 
 def p_statement_print(p):
