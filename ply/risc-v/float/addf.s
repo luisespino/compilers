@@ -16,20 +16,20 @@ f_sign_hex2: .word 0x0
 .text
 .globl _start
 _start:
-	    # load hex values
-	    lw a0, hex1
+	# load hex values
+	lw a0, hex1
     	lw a1, hex2
     	# call function
     	jal ra, addf
     	# print return value a0
     	li a7, 34
-	    ecall
-	    # exit
+	ecall
+	# exit
     	li a7, 10
     	ecall
     
 addf:
-	    # extract signs
+	# extract signs
     	la t0, f_sign_hex1
     	slli t1, a0, 31
     	andi t1, t1, 0x1
@@ -99,7 +99,7 @@ f_exp_diff_gtz:
     	sw t1, 0(t0)
     
 f_exp_diff_gtz_end:
-	    # adding mantissas
+	# adding mantissas
     	la t0, f_man_sum
     	lw t1, f_man_hex1
     	lw t2, f_man_hex2
@@ -124,7 +124,7 @@ sum_carry:
     	sw t1, 0(t0)
     
 combine_result:
-	    lw t0, f_sign_hex1
+	lw t0, f_sign_hex1
     	slli t0, t0, 31
     	lw t1, f_exp_hex1
     	addi t1, t1, 127
@@ -136,3 +136,4 @@ combine_result:
     	or t0, t0, t2
     	mv a0, t0
     	ret
+
