@@ -142,7 +142,7 @@ def p_s_while(p):
     global label
     newlabel()
     begin = 'L'+str(label)
-    p[3].code += begin+':\n'
+    p[3].code = begin+':\n' + p[3].code
     p[3].code += p[3].true + p[5].code
     p[3].code += '\t'+'j '+begin+'\n'
     p[3].code += p[3].false
