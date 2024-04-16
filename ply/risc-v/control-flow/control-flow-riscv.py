@@ -134,7 +134,7 @@ def p_s_if_else(p):
     p[3].code += '\t'+'j '+next+'\n'
     p[3].code += p[3].false + t[7].code
     next += ':\n'
-    p[3].text += next
+    p[3].code += next
     p[0] = syn('ifelse', p[3].code, '', '')
 
 def p_s_while(p):
