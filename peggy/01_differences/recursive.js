@@ -1,7 +1,7 @@
 let x;
 
 function S() {
-    document.getElementById("log").innerHTML = x + ' = ' + E();
+    document.getElementById("log").innerHTML = E();
 }
 
 function E() {
@@ -32,5 +32,9 @@ function F() {
     }
 }
 
-x = "2+3*5";
-S();
+document.getElementById("x").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        x = document.getElementById("x").value;
+        S();
+    }
+});
