@@ -4,4 +4,4 @@
 
 [Top-down parser (recursive descent)](https://luisespino.github.io/compilers/peggy/01_differences/recursive.html)
 
-[Parsing Expression Grammar PEG (packrat parser)](https://luisespino.github.io/compilers/peggy/02_calc/calc.html)
+[Packrat parser (parsing expression grammar PEG)](https://luisespino.github.io/compilers/peggy/02_calc/calc.html)
