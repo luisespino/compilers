@@ -86,10 +86,13 @@ function parse() {
     result = [];
     stack = [];
     error = false;
+    let cont = 0;
     while (!error && (x.length > 0 || stack.length > 0)) {
         shift();
         reduce();
+        cont ++;
     }
+    document.getElementById("log").innerHTML += cont;
 }
 
 document.getElementById("x").addEventListener("keydown", function(e) {
