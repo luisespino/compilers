@@ -17,14 +17,14 @@ instruction
 	/ _ op:"or "i rd:reg comma rs1:reg comma rs2:reg end
 	/ _ op:"xor "i rd:reg comma rs1:reg comma rs2:reg end
 	
-    // load/store
+    	// load/store
 	/ _ op:"lw "i rd:reg comma imm:imm end
    	/ _ op:"st "i rd:reg comma imm:imm end
 
 	// pseudo
 	/ _ op:"mv "i rd:reg comma rs:reg end
-    / _ op:"nop"i _ end
-    / end
+    	/ _ op:"nop"i _ end
+    	/ end
      
 reg "register"
 	= _ ("zero"i/"x0"i/"r0"i)
