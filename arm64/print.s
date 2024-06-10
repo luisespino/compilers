@@ -2,7 +2,7 @@
     Hello world
     Luis Espino 2024
     
-    output: (./test.s ; echo $?)
+    output:
     Hello, World!
 */
 
