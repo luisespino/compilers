@@ -92,7 +92,7 @@ function parse() {
         reduce();
         cont ++;
     }
-    document.getElementById("log").innerHTML += cont;
+    //document.getElementById("log").innerHTML += cont;
 }
 
 document.getElementById("x").addEventListener("keydown", function(e) {
