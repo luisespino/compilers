@@ -38,6 +38,6 @@ e = left:t "+" right:e { return new node("+",left,right); }
 t = left:f "*" right:t { return new node("*",left,right); }
     / f
 
-f = _ num:[0-9]+ _ { return new node(num); }
+f = _ num:[0-9]+ _ { return new node(parseInt(num.join(""), 10)); }
 
 _ = [ \t\n\r]*
