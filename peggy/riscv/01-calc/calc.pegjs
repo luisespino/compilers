@@ -57,7 +57,7 @@ Integer "integer"
   = _ num:[0-9]+ _ 
     {
     	t += 4;
-    	code += '\n\t'+'li t0, '+num;
+    	code += '\n\t'+'li t0, '+num.join("");
     	code += '\n\t'+'li t3, '+t;
         code += '\n\t'+'sw t0, 0(t3)';      
         return t;    

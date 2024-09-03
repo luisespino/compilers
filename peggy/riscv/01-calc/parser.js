@@ -234,7 +234,7 @@ function peg$parse(input, options) {
   var peg$f3 = function(expr) { return expr; };
   var peg$f4 = function(num) {
     	t += 4;
-    	code += '\n\t'+'li t0, '+num;
+    	code += '\n\t'+'li t0, '+num.join("");
     	code += '\n\t'+'li t3, '+t;
         code += '\n\t'+'sw t0, 0(t3)';      
         return t;    
