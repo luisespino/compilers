@@ -4,44 +4,57 @@
     code += "\n_start:\n";    
 }
 
-s = res:e
+Sentence
+  = Expression
 	{
     	code += '\n\t'+'li a0, 0';
     	code += '\n\t'+'li a7, 93';
    		code += '\n\t'+'ecall\n';
        	return code;
     }
-
-e = left:t "+" right:e 
-	{
-    	t += 4;
-    	code += '\n\t'+'li t3, '+left;
-        code += '\n\t'+'lw t1, 0(t3)';
-    	code += '\n\t'+'li t3, '+right;
-    	code += '\n\t'+'lw t2, 0(t3)';
-    	code += '\n\t'+'add t0, t1, t2';
-    	code += '\n\t'+'li t3, '+t;
-    	code += '\n\t'+'sw t0, 0(t3)';        
-        return t;
+    
+Expression
+  = head:Term tail:(_ ("+" / "-") _ Term)* {
+      return tail.reduce(function(result, element) {
+        if (element[1] === "+")
+		{
+    		t += 4;
+    		code += '\n\t'+'li t3, '+result;
+        	code += '\n\t'+'lw t1, 0(t3)';
+    		code += '\n\t'+'li t3, '+element[3];
+    		code += '\n\t'+'lw t2, 0(t3)';
+    		code += '\n\t'+'add t0, t1, t2';
+    		code += '\n\t'+'li t3, '+t;
+    		code += '\n\t'+'sw t0, 0(t3)';        
+        	return t;
+    	}
+      }, head);
     }
-    / t
 
-t = left:f "*" right:t 
-	{
-    	t += 4;
-    	code += '\n\t'+'li t3, '+left;
-        code += '\n\t'+'lw t1, 0(t3)';
-    	code += '\n\t'+'li t3, '+right;
-    	code += '\n\t'+'lw t2, 0(t3)';
-    	code += '\n\t'+'mul t0, t1, t2';
-    	code += '\n\t'+'li t3, '+t;
-    	code += '\n\t'+'sw t0, 0(t3)';        
-        return t;
+Term
+  = head:Factor tail:(_ ("*" / "/") _ Factor)* {
+      return tail.reduce(function(result, element) {
+        if (element[1] === "*")
+		{
+    		t += 4;
+    		code += '\n\t'+'li t3, '+result;
+        	code += '\n\t'+'lw t1, 0(t3)';
+    		code += '\n\t'+'li t3, '+element[3];
+    		code += '\n\t'+'lw t2, 0(t3)';
+    		code += '\n\t'+'mul t0, t1, t2';
+    		code += '\n\t'+'li t3, '+t;
+    		code += '\n\t'+'sw t0, 0(t3)';        
+        	return t;
+    	}
+      }, head);
     }
-    / f
 
-f = _ "(" mid:e ")" { return mid; }
-	/ _ num:[0-9]+ _ 
+Factor
+  = "(" _ expr:Expression _ ")" { return expr; }
+  / Integer
+
+Integer "integer"
+  = _ num:[0-9]+ _ 
     {
     	t += 4;
     	code += '\n\t'+'li t0, '+num;
@@ -49,5 +62,6 @@ f = _ "(" mid:e ")" { return mid; }
         code += '\n\t'+'sw t0, 0(t3)';      
         return t;    
     }
-
-_ = [ \t\n\r]*
+  
+_ "whitespace"
+  = [ \t\n\r]*
