@@ -220,7 +220,13 @@ function peg$parse(input, options) {
         return t;
     };
   var peg$f3 = function(mid) { return mid; };
-  var peg$f4 = function(num) { return parseInt(num.join(""), 10); };
+  var peg$f4 = function(num) {
+    	t += 4;
+    	code += '\n\t'+'li t0, '+num;
+    	code += '\n\t'+'li t3, '+t;
+        code += '\n\t'+'sw t0, 0(t3)';      
+        return t;    
+    };
   var peg$currPos = options.peg$currPos | 0;
   var peg$savedPos = peg$currPos;
   var peg$posDetailsCache = [{ line: 1, column: 1 }];

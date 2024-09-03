@@ -41,6 +41,13 @@ t = left:f "*" right:t
     / f
 
 f = _ "(" mid:e ")" { return mid; }
-	/ _ num:[0-9]+ _ { return parseInt(num.join(""), 10); }
+	/ _ num:[0-9]+ _ 
+    {
+    	t += 4;
+    	code += '\n\t'+'li t0, '+num;
+    	code += '\n\t'+'li t3, '+t;
+        code += '\n\t'+'sw t0, 0(t3)';      
+        return t;    
+    }
 
 _ = [ \t\n\r]*
