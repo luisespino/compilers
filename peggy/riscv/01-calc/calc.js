@@ -1,5 +1,5 @@
 // import model 
-import { StartRules, SyntaxError, parse } from 'parser.mjs'
+import { StartRules, SyntaxError, parse } from './parser.mjs'
 
 let x;
 
