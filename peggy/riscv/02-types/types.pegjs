@@ -7,10 +7,10 @@
 
 start
     = statement* {
-  	    code += '\n\t'+'li a0, 0';
+        code += '\n\t'+'li a0, 0';
         code += '\n\t'+'li a7, 93';
         code += '\n\t'+'ecall\n';
-  	    return data+code;
+        return data+code;
     }
 
 statement
