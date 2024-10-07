@@ -982,7 +982,7 @@ function peg$parse(input, options) {
     const variables = {};
     let t = 0;
     let data = ".global _start\n\n.data\n";
-    let code = "\n.text\n_start:\n";
+    let code = "\n.text\n_start:";
 
   peg$result = peg$startRuleFunction();
 
