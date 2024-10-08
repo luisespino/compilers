@@ -127,7 +127,7 @@ assignment
             code += '\tli t1, 4\n';
     		code += '\tmul t0, t0, t1\n';
     		code += '\tli t1, ' + String(index[1]) + '\n';
-            code += '\tli t2 4\n';
+            code += '\tli t2, 4\n';
     		code += '\tmul t1, t1, t2\n';
     		code += '\tlw t2, ' + varSrcName + '_cols\n';
     		code += '\tmul t3, t0, t2\n';
