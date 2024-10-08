@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script type="text/javascript" src="parser.js"></script>
+    </head>
+
+<body>
+    <h2>SArrays translator to RISC-V</h2>
+    <p>Test expression with declaration and assigment then press enter</p>
+    <textarea type="text" id="x" rows="10">
+int x = 0;
+int y = 0;
+int z = 0;
+        
+int a = [];
+int b = [1, 2, 3];
+int c = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+int d = [[[1, 2], [3, 4]], [[5, 6],[7, 8]]];
+        
+x = b[1];
+y = c[2][2];
+z = d[1][0][0];
+    </textarea>
+    <pre id="log" style="color:red;"></pre>
+    <script type="text/javascript" src="arrays.js"></script>
+</body>
+
+</html>
