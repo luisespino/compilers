@@ -261,7 +261,7 @@ function peg$parse(input, options) {
 		}
 		if (dimensions.length === 1) { // [COL]
     		code += '\tli t0, ' + index + '\n';
-    		code += '\tslli t0, t0, 2\n';
+    		code += '\tmul t0, t0, 4\n';
     		code += '\tla t1, ' + varSrcName + '\n';
     		code += '\tadd t2, t1, t0\n';
             code += '\tla t0, ' + varDestName + '\n';
@@ -269,7 +269,7 @@ function peg$parse(input, options) {
     		code += '\tsw t1, 0(t0)\n\n';
 		} else if (dimensions.length === 2) { // [ROW][COL]
     		code += '\tli t0, ' + String(index[0]) + '\n';
-    		code += '\tslli t0, t0, 2\n';
+    		code += '\tmul t0, t0, 4\n';
     		code += '\tli t1, ' + String(index[1]) + '\n';
     		code += '\tslli t1, t1, 2\n';
     		code += '\tlw t2, ' + varSrcName + '_cols\n';
@@ -282,7 +282,7 @@ function peg$parse(input, options) {
     		code += '\tsw t1, 0(t0)\n\n';
 		} else if (dimensions.length === 3) { // [FACE][ROW][COL]
     		code += '\tli t0, ' + String(index[0]) + '\n';
-    		code += '\tslli t0, t0, 2\n';
+    		code += '\tmul t0, t0, 4\n';
     		code += '\tli t1, ' + String(index[1]) + '\n';
     		code += '\tslli t1, t1, 2\n';
     		code += '\tli t2, ' + String(index[2]) + '\n';
