@@ -26,9 +26,9 @@ prog
         for (const sentence of s) {
             allCode += sentence.code;
         }
-        allcode += '\n\t'+'li a0, 0';
-        allcode += '\n\t'+'li a7, 93';
-        allcode += '\n\t'+'ecall\n';
+        allCode += '\n\t'+'li a0, 0';
+        allCode += '\n\t'+'li a7, 93';
+        allCode += '\n\t'+'ecall\n';
         return allCode;
     }
 
