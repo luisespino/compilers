@@ -225,6 +225,9 @@ function peg$parse(input, options) {
         for (const sentence of s) {
             allCode += sentence.code;
         }
+        allCode += '\n\t'+'li a0, 0';
+        allCode += '\n\t'+'li a7, 93';
+        allCode += '\n\t'+'ecall\n';
         return allCode;
     };
   var peg$f1 = function(name, expr) {
