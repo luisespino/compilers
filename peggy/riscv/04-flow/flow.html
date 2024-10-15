@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <script type="text/javascript" src="parser.js"></script>
+    </head>
+
+<body>
+    <h2>Control flow translator to RISC-V</h2>
+    <p>Test expression with declaration and assigment then press enter</p>
+    <textarea type="text" id="x" rows="15" cols="50">
+int x = 10
+int y = 10
+if (x<100 || x>200 && x!=y)
+    x = 0
+endif
+    </textarea>
+    <pre id="log" style="color:red;"></pre>
+    <script type="text/javascript" src="flow.js"></script>
+</body>
+
+</html>
