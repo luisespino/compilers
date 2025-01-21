@@ -119,7 +119,6 @@ t : t op=('*'|'/') f    # Muldiv
   ;
 
 f : '(' e ')'           # PassE
-  | ID                  # Id 
   | NUM                 # Num
   ;
 
