@@ -65,7 +65,7 @@ Check the installed version:
 dotnet --version
 ```
 
-![Alt text](https://github.com/luisespino/compilers/blob/master/antlr-csharp/01-calc/screen1.png?raw=true "version")
+![Alt text](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/screen1.png?raw=true "version")
 
 ## Check or install OpenJDK
 
@@ -81,7 +81,7 @@ If OpenJDK is not installed, install it:
 sudo pacman -S jdk-openjdk
 ```
 
-![Alt text](https://github.com/luisespino/compilers/blob/master/antlr-csharp/01-calc/screen2.png?raw=true "version")
+![Alt text](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/screen2.png?raw=true "version")
 
 
 ## Install ANTLR4
@@ -101,7 +101,7 @@ Add the ANTLR dependency:
 ```
 dotnet add package Antlr4.Runtime.Standard
 ```
-Write the grammar [Calc.g4](https://github.com/luisespino/compilers/blob/master/antlr-csharp/01-calc/Calc.g4), for a simple calculator:
+Write the grammar [Calc.g4](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/Calc.g4), for a simple calculator:
 ```
 grammar Calc;
 
@@ -136,7 +136,7 @@ The following files will be generated:
 - CalcListener.cs
 - CalcBaseListener.cs
 
-Create the [CalcListenerImpl.cs](https://github.com/luisespino/compilers/blob/master/antlr-csharp/01-calc/CalcListenerImpl.cs) file:
+Create the [CalcListenerImpl.cs](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/CalcListenerImpl.cs) file:
 ```
 using Antlr4.Runtime.Misc;
 using System;
@@ -176,7 +176,7 @@ public class CalcListenerImpl : CalcBaseListener
 }
 ```
 
-Modify the [Program.cs](https://github.com/luisespino/compilers/blob/master/antlr-csharp/01-calc/Program.cs) file:
+Modify the [Program.cs](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/Program.cs) file:
 ```
 using Antlr4.Runtime;
 using System;
@@ -223,4 +223,4 @@ dotnet run
 ````
 Now, the process is complete, and your calculator will evaluate expressions entered by the user!
 
-![Alt text](https://github.com/luisespino/compilers/blob/master/antlr-csharp/01-calc/screen2.png?raw=true "version")
+![Alt text](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/screen2.png?raw=true "version")
