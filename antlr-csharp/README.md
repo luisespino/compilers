@@ -223,4 +223,4 @@ dotnet run
 ````
 Now, the process is complete, and your calculator will evaluate expressions entered by the user!
 
-![Alt text](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/screen2.png?raw=true "version")
+![Alt text](https://github.com/luisespino/compilers/blob/main/antlr-csharp/01-calc/screen3.png?raw=true "version")
