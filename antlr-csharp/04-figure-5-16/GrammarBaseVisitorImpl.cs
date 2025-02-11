@@ -26,8 +26,7 @@ public class GrammarBaseVisitorImpl : GrammarBaseVisitor<string>
         }
         else
         {
-            string currentDimension = context.n().NUM().GetText();
-            return $"array({currentDimension}, {baseType})";
+            return baseType;
         }
     }
 
