@@ -51,7 +51,7 @@ public class Translator : GrammarBaseVisitor<Attr>
         {
             Visit(sContext);
         }
-        Code += "\n\tmov X8, #93\n\tsvc #0\n";
+        Code += "\tmov X8, #93\n\tsvc #0\n";
         return new Attr { AddrNUM = null, AddrID = null, Code = Data+Code };
     }
 
@@ -121,26 +121,26 @@ public class Translator : GrammarBaseVisitor<Attr>
                 Code += "\t"+"add X1, X1, #"+left.AddrNUM+"\n";
                 Code += "\t"+"ldr X2, ="+right.AddrID+"\n";
                 Code += "\t"+"ldr X3, [X2]\n";
-                Code += "\t"+op+" X1, X3, #"+right.AddrNUM+"\n";
+                Code += "\t"+op+" X1, X1, X3\n";
                 Code += "\t"+"str X1, [X0]\n";
             }
         }
         else
         {
             if (isNUM(right)) {
-                Code += "\t"+"ldr X2, ="+left.AddrID+"\n";
-                Code += "\t"+"ldr X3, [X2]\n";
-                Code += "\t"+op+" X3, X3, #"+right.AddrNUM+"\n";
-                Code += "\t"+"str X3, [X0]\n";
+                Code += "\t"+"ldr X1, ="+left.AddrID+"\n";
+                Code += "\t"+"ldr X2, [X1]\n";
+                Code += "\t"+op+" X2, X2, #"+right.AddrNUM+"\n";
+                Code += "\t"+"str X2, [X0]\n";
             }
             else
             {
-                Code += "\t"+"ldr X2, ="+left.AddrID+"\n";
-                Code += "\t"+"ldr X3, [X2]\n";
-                Code += "\t"+"ldr X4, ="+right.AddrID+"\n";
-                Code += "\t"+"ldr X5, [X4]\n";
-                Code += "\t"+op+" X3, X3, X5\n";
-                Code += "\t"+"str X3, [X0]\n";
+                Code += "\t"+"ldr X1, ="+left.AddrID+"\n";
+                Code += "\t"+"ldr X2, [X1]\n";
+                Code += "\t"+"ldr X3, ="+right.AddrID+"\n";
+                Code += "\t"+"ldr X4, [X3]\n";
+                Code += "\t"+op+" X2, X2, X4\n";
+                Code += "\t"+"str X2, [X0]\n";
             }        
         }
         Code += "\n";
@@ -172,28 +172,27 @@ public class Translator : GrammarBaseVisitor<Attr>
                 Code += "\t"+"add X1, X1, #"+left.AddrNUM+"\n";
                 Code += "\t"+"ldr X2, ="+right.AddrID+"\n";
                 Code += "\t"+"ldr X3, [X2]\n";
-                Code += "\t"+"mov X4, #"+right.AddrNUM+"\n";
-                Code += "\t"+op+" X1, X3, X4\n";
+                Code += "\t"+op+" X1, X1, X3\n";
                 Code += "\t"+"str X1, [X0]\n";
             }
         }
         else
         {
             if (isNUM(right)) {
-                Code += "\t"+"ldr X2, ="+left.AddrID+"\n";
-                Code += "\t"+"ldr X3, [X2]\n";
-                Code += "\t"+"mov X4, #"+right.AddrNUM+"\n";
-                Code += "\t"+op+" X3, X3, X4\n";
-                Code += "\t"+"str X3, [X0]\n";
+                Code += "\t"+"ldr X1, ="+left.AddrID+"\n";
+                Code += "\t"+"ldr X2, [X1]\n";
+                Code += "\t"+"mov X3, #"+right.AddrNUM+"\n";
+                Code += "\t"+op+" X2, X2, X3\n";
+                Code += "\t"+"str X2, [X0]\n";
             }
             else
             {
-                Code += "\t"+"ldr X2, ="+left.AddrID+"\n";
-                Code += "\t"+"ldr X3, [X2]\n";
-                Code += "\t"+"ldr X4, ="+right.AddrID+"\n";
-                Code += "\t"+"ldr X5, [X4]\n";
-                Code += "\t"+op+" X3, X3, X5\n";
-                Code += "\t"+"str X3, [X0]\n";
+                Code += "\t"+"ldr X1, ="+left.AddrID+"\n";
+                Code += "\t"+"ldr X2, [X1]\n";
+                Code += "\t"+"ldr X3, ="+right.AddrID+"\n";
+                Code += "\t"+"ldr X4, [X3]\n";
+                Code += "\t"+op+" X2, X2, X4\n";
+                Code += "\t"+"str X2, [X0]\n";
             }        
         }
         Code += "\n";
