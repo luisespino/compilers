@@ -1,48 +1,47 @@
 grammar Grammar;
 
-
 WS : [ \t\n\r]+ -> skip;
 NAME : [a-zA-Z]+;
 DIGIT : [0-9]+;
 
 prog
-    : stmt* EOF
+    : stmt* EOF                     # Program
     ;
 
 stmt
-    : decl
-    | assg
+    : decl                          # StmtDeclaration
+    | assg                          # StmtAssigment
     ;
 
 decl
-    : 'int' var '=' array ';'
-    | 'int' var '=' val ';'
+    : type='int' var '=' expr ';'   # DeclExpr
+    | type='int' var '=' val ';'    # DeclValue
     ;
 
 assg
-    : var '=' var index ';'
+    : var '=' var index ';'         # AssgArray
     ;
 
 var
-    : NAME
+    : NAME                          # VarName
     ;
 
-array
-    : '[' ']'
-    | '[' list ']'
+expr
+    : '[' ']'                       # ExprEmpty
+    | '[' list ']'                  # ExprValues
     ;
     
 val
-    : DIGIT
-    | array
+    : DIGIT                         # ValDigit
+    | expr                          # ValExpr
     ;
 
 index
-    : '[' val ']' index
-    | '[' val ']'
+    : '[' val ']' index             # IndexMany
+    | '[' val ']'                   # IndexOne
     ;
 
 list
-    : val ',' list
-    | val
+    : val ',' list                  # Values
+    | val                           # Value
     ;
