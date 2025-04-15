@@ -1,0 +1,10 @@
+int a = 0;
+int b = a;
+
+if (a == b)
+    a = 1;
+endif
+
+while (a > 0)
+    a = a - 1;
+endwhile
