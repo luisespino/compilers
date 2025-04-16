@@ -1,10 +1,6 @@
-int a = 0;
-int b = a;
+int x = 50;
+int y = 300;
 
-if (a == b)
-    a = 1;
+if (x < 100 || x > 200 && x != y)
+    x = 0;
 endif
-
-while (a > 0)
-    a = a - 1;
-endwhile

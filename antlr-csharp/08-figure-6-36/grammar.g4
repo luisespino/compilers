@@ -58,23 +58,21 @@ cond
 
 bool
     : or
-    | and
-    | not
-    | rel
-    | T
-    | F
     ;
 
 or
-    : expr '||' expr
+    : and '||' or
+    | and
     ;
 
 and
-    : expr '&&' expr
+    : not '&&' and
+    | not
     ;
 
 not
     : '!' expr
+    | rel
     ;
 
 rel
