@@ -20,12 +20,12 @@ var
     ;
 
 expr
-    : expr ('+'|'-') term
+    : expr ('+'|'-') term               # ExprSumRes
     | term
     ;
     
 term
-    : term ('+'|'-') fact
+    : term ('*'|'/') fact               # ExprMulDiv
     | fact
     ;
     
@@ -61,17 +61,17 @@ bool
     ;
 
 or
-    : and '||' or
+    : and '||' or                       # BoolOr
     | and
     ;
 
 and
-    : not '&&' and
+    : not '&&' and                      # BoolAnd
     | not
     ;
 
 not
-    : '!' expr
+    : '!' expr                          # BoolNot
     | rel
     ;
 
