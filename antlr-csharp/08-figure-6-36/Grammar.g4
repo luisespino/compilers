@@ -21,12 +21,12 @@ var
 
 expr
     : expr ('+'|'-') term               # ExprSumRes
-    | term
+    | term                              # ExprTerm
     ;
     
 term
     : term ('*'|'/') fact               # ExprMulDiv
-    | fact
+    | fact                              # ExprFact
     ;
     
 fact
@@ -61,18 +61,18 @@ bool
     ;
 
 or
-    : and '||' or                       # BoolOr
-    | and
+    : and '||' or                       # OrExpr
+    | and                               # OrPass
     ;
 
 and
-    : not '&&' and                      # BoolAnd
-    | not
+    : not '&&' and                      # AndExpr
+    | not                               # AndPass
     ;
 
 not
-    : '!' expr                          # BoolNot
-    | rel
+    : '!' not                          	# NotExpr
+    | rel                               # NotPass
     ;
 
 rel
