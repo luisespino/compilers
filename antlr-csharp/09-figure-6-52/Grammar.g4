@@ -6,43 +6,40 @@ prog
 
 stmt
   : fun
-  | ret SEMI
   | call SEMI
   ;
 
 fun
-  : id LPAREN args? RPAREN LBRACE stmt* RBRACE
+  : id LPAREN args? RPAREN LBRACE ret RBRACE
   ;
 
 ret
-  : 'return' expr
+  : 'return' expr SEMI
   ;
 
 args
-  : expr (COMMA expr)*
+  : id (COMMA id)*
   ;
 
 call
-  : id LPAREN args? RPAREN
+  : id LPAREN argsend? RPAREN
+  ;
+  
+argsend
+  : num (COMMA num)*
   ;
 
 expr
-  : term ((PLUS | MINUS) term)*
-  ;
-
-term
-  : fact ((MUL | DIV) fact)*
-  ;
-
-fact
-  : call
-  | id
-  | NUMBER
-  | LPAREN expr RPAREN
+  : id
+  | num
   ;
 
 id
   : IDENTIFIER
+  ;
+  
+num
+  : NUMBER
   ;
 
 SEMI    : ';';
