@@ -46,7 +46,7 @@ public class Translator : GrammarBaseVisitor<string>
         
         string ret = Visit(context.ret());
         if (args.ContainsKey(ret))
-	    Func += "\t"+"mov X0, ="+args[ret].Reg+"\n";
+	    Func += "\t"+"mov X0, "+args[ret].Reg+"\n";
 	else
 	    Func += "\t"+"mov X0, #"+ret+"\n";
         Func += "\t"+"ret\n";
