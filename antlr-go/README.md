@@ -31,7 +31,7 @@ go version
 
 You should see something like: go version go1.24.4 linux/amd64
 
-## Create and run a new project
+## Create and Run a New Project
 
 Create a new project:
 ```
