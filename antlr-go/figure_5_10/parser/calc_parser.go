@@ -1,73 +1,93 @@
-// Code generated from Calc.g4 by ANTLR 4.9.3. DO NOT EDIT.
+// Code generated from Calc.g4 by ANTLR 4.13.2. DO NOT EDIT.
 
 package parser // Calc
 
 import (
 	"fmt"
-	"reflect"
 	"strconv"
+	"sync"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr4-go/antlr/v4"
 )
 
 // Suppress unused import errors
 var _ = fmt.Printf
-var _ = reflect.Copy
 var _ = strconv.Itoa
-
-var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 11, 39, 4,
-	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 7,
-	2, 15, 10, 2, 12, 2, 14, 2, 18, 11, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 7, 3, 26, 10, 3, 12, 3, 14, 3, 29, 11, 3, 3, 4, 3, 4, 3, 4, 3, 4, 3,
-	4, 3, 4, 5, 4, 37, 10, 4, 3, 4, 2, 4, 2, 4, 5, 2, 4, 6, 2, 4, 3, 2, 3,
-	4, 3, 2, 5, 6, 2, 39, 2, 8, 3, 2, 2, 2, 4, 19, 3, 2, 2, 2, 6, 36, 3, 2,
-	2, 2, 8, 9, 8, 2, 1, 2, 9, 10, 5, 4, 3, 2, 10, 16, 3, 2, 2, 2, 11, 12,
-	12, 4, 2, 2, 12, 13, 9, 2, 2, 2, 13, 15, 5, 4, 3, 2, 14, 11, 3, 2, 2, 2,
-	15, 18, 3, 2, 2, 2, 16, 14, 3, 2, 2, 2, 16, 17, 3, 2, 2, 2, 17, 3, 3, 2,
-	2, 2, 18, 16, 3, 2, 2, 2, 19, 20, 8, 3, 1, 2, 20, 21, 5, 6, 4, 2, 21, 27,
-	3, 2, 2, 2, 22, 23, 12, 4, 2, 2, 23, 24, 9, 3, 2, 2, 24, 26, 5, 6, 4, 2,
-	25, 22, 3, 2, 2, 2, 26, 29, 3, 2, 2, 2, 27, 25, 3, 2, 2, 2, 27, 28, 3,
-	2, 2, 2, 28, 5, 3, 2, 2, 2, 29, 27, 3, 2, 2, 2, 30, 31, 7, 7, 2, 2, 31,
-	32, 5, 2, 2, 2, 32, 33, 7, 8, 2, 2, 33, 37, 3, 2, 2, 2, 34, 37, 7, 9, 2,
-	2, 35, 37, 7, 10, 2, 2, 36, 30, 3, 2, 2, 2, 36, 34, 3, 2, 2, 2, 36, 35,
-	3, 2, 2, 2, 37, 7, 3, 2, 2, 2, 5, 16, 27, 36,
-}
-var literalNames = []string{
-	"", "'+'", "'-'", "'*'", "'/'", "'('", "')'",
-}
-var symbolicNames = []string{
-	"", "", "", "", "", "", "", "ID", "NUM", "WS",
-}
-
-var ruleNames = []string{
-	"e", "t", "f",
-}
+var _ = sync.Once{}
 
 type CalcParser struct {
 	*antlr.BaseParser
 }
 
-// NewCalcParser produces a new parser instance for the optional input antlr.TokenStream.
-//
-// The *CalcParser instance produced may be reused by calling the SetInputStream method.
-// The initial parser configuration is expensive to construct, and the object is not thread-safe;
-// however, if used within a Golang sync.Pool, the construction cost amortizes well and the
-// objects can be used in a thread-safe manner.
-func NewCalcParser(input antlr.TokenStream) *CalcParser {
-	this := new(CalcParser)
-	deserializer := antlr.NewATNDeserializer(nil)
-	deserializedATN := deserializer.DeserializeFromUInt16(parserATN)
-	decisionToDFA := make([]*antlr.DFA, len(deserializedATN.DecisionToState))
-	for index, ds := range deserializedATN.DecisionToState {
-		decisionToDFA[index] = antlr.NewDFA(ds, index)
-	}
-	this.BaseParser = antlr.NewBaseParser(input)
+var CalcParserStaticData struct {
+	once                   sync.Once
+	serializedATN          []int32
+	LiteralNames           []string
+	SymbolicNames          []string
+	RuleNames              []string
+	PredictionContextCache *antlr.PredictionContextCache
+	atn                    *antlr.ATN
+	decisionToDFA          []*antlr.DFA
+}
 
-	this.Interpreter = antlr.NewParserATNSimulator(this, deserializedATN, decisionToDFA, antlr.NewPredictionContextCache())
-	this.RuleNames = ruleNames
-	this.LiteralNames = literalNames
-	this.SymbolicNames = symbolicNames
+func calcParserInit() {
+	staticData := &CalcParserStaticData
+	staticData.LiteralNames = []string{
+		"", "'+'", "'-'", "'*'", "'/'", "'('", "')'",
+	}
+	staticData.SymbolicNames = []string{
+		"", "", "", "", "", "", "", "ID", "NUM", "WS",
+	}
+	staticData.RuleNames = []string{
+		"e", "t", "f",
+	}
+	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
+	staticData.serializedATN = []int32{
+		4, 1, 9, 37, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 1, 0, 1, 0, 1, 0, 1, 0,
+		1, 0, 1, 0, 5, 0, 13, 8, 0, 10, 0, 12, 0, 16, 9, 0, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 5, 1, 24, 8, 1, 10, 1, 12, 1, 27, 9, 1, 1, 2, 1, 2, 1, 2,
+		1, 2, 1, 2, 1, 2, 3, 2, 35, 8, 2, 1, 2, 0, 2, 0, 2, 3, 0, 2, 4, 0, 2, 1,
+		0, 1, 2, 1, 0, 3, 4, 37, 0, 6, 1, 0, 0, 0, 2, 17, 1, 0, 0, 0, 4, 34, 1,
+		0, 0, 0, 6, 7, 6, 0, -1, 0, 7, 8, 3, 2, 1, 0, 8, 14, 1, 0, 0, 0, 9, 10,
+		10, 2, 0, 0, 10, 11, 7, 0, 0, 0, 11, 13, 3, 2, 1, 0, 12, 9, 1, 0, 0, 0,
+		13, 16, 1, 0, 0, 0, 14, 12, 1, 0, 0, 0, 14, 15, 1, 0, 0, 0, 15, 1, 1, 0,
+		0, 0, 16, 14, 1, 0, 0, 0, 17, 18, 6, 1, -1, 0, 18, 19, 3, 4, 2, 0, 19,
+		25, 1, 0, 0, 0, 20, 21, 10, 2, 0, 0, 21, 22, 7, 1, 0, 0, 22, 24, 3, 4,
+		2, 0, 23, 20, 1, 0, 0, 0, 24, 27, 1, 0, 0, 0, 25, 23, 1, 0, 0, 0, 25, 26,
+		1, 0, 0, 0, 26, 3, 1, 0, 0, 0, 27, 25, 1, 0, 0, 0, 28, 29, 5, 5, 0, 0,
+		29, 30, 3, 0, 0, 0, 30, 31, 5, 6, 0, 0, 31, 35, 1, 0, 0, 0, 32, 35, 5,
+		7, 0, 0, 33, 35, 5, 8, 0, 0, 34, 28, 1, 0, 0, 0, 34, 32, 1, 0, 0, 0, 34,
+		33, 1, 0, 0, 0, 35, 5, 1, 0, 0, 0, 3, 14, 25, 34,
+	}
+	deserializer := antlr.NewATNDeserializer(nil)
+	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
+	atn := staticData.atn
+	staticData.decisionToDFA = make([]*antlr.DFA, len(atn.DecisionToState))
+	decisionToDFA := staticData.decisionToDFA
+	for index, state := range atn.DecisionToState {
+		decisionToDFA[index] = antlr.NewDFA(state, index)
+	}
+}
+
+// CalcParserInit initializes any static state used to implement CalcParser. By default the
+// static state used to implement the parser is lazily initialized during the first call to
+// NewCalcParser(). You can call this function if you wish to initialize the static state ahead
+// of time.
+func CalcParserInit() {
+	staticData := &CalcParserStaticData
+	staticData.once.Do(calcParserInit)
+}
+
+// NewCalcParser produces a new parser instance for the optional input antlr.TokenStream.
+func NewCalcParser(input antlr.TokenStream) *CalcParser {
+	CalcParserInit()
+	this := new(CalcParser)
+	this.BaseParser = antlr.NewBaseParser(input)
+	staticData := &CalcParserStaticData
+	this.Interpreter = antlr.NewParserATNSimulator(this, staticData.atn, staticData.decisionToDFA, staticData.PredictionContextCache)
+	this.RuleNames = staticData.RuleNames
+	this.LiteralNames = staticData.LiteralNames
+	this.SymbolicNames = staticData.SymbolicNames
 	this.GrammarFileName = "Calc.g4"
 
 	return this
@@ -100,21 +120,25 @@ type IEContext interface {
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
-
 	// IsEContext differentiates from other interfaces.
 	IsEContext()
 }
 
 type EContext struct {
-	*antlr.BaseParserRuleContext
+	antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
 func NewEmptyEContext() *EContext {
 	var p = new(EContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
 	p.RuleIndex = CalcParserRULE_e
 	return p
+}
+
+func InitEmptyEContext(p *EContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcParserRULE_e
 }
 
 func (*EContext) IsEContext() {}
@@ -122,7 +146,7 @@ func (*EContext) IsEContext() {}
 func NewEContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *EContext {
 	var p = new(EContext)
 
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
 
 	p.parser = parser
 	p.RuleIndex = CalcParserRULE_e
@@ -132,8 +156,8 @@ func NewEContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingSt
 
 func (s *EContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *EContext) CopyFrom(ctx *EContext) {
-	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
+func (s *EContext) CopyAll(ctx *EContext) {
+	s.CopyFrom(&ctx.BaseParserRuleContext)
 }
 
 func (s *EContext) GetRuleContext() antlr.RuleContext {
@@ -145,16 +169,16 @@ func (s *EContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) stri
 }
 
 type SumresContext struct {
-	*EContext
+	EContext
 	op antlr.Token
 }
 
 func NewSumresContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *SumresContext {
 	var p = new(SumresContext)
 
-	p.EContext = NewEmptyEContext()
+	InitEmptyEContext(&p.EContext)
 	p.parser = parser
-	p.CopyFrom(ctx.(*EContext))
+	p.CopyAll(ctx.(*EContext))
 
 	return p
 }
@@ -168,7 +192,13 @@ func (s *SumresContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *SumresContext) E() IEContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEContext)(nil)).Elem(), 0)
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IEContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
 
 	if t == nil {
 		return nil
@@ -178,7 +208,13 @@ func (s *SumresContext) E() IEContext {
 }
 
 func (s *SumresContext) T() ITContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ITContext)(nil)).Elem(), 0)
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(ITContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
 
 	if t == nil {
 		return nil
@@ -200,15 +236,15 @@ func (s *SumresContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 type PassTContext struct {
-	*EContext
+	EContext
 }
 
 func NewPassTContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *PassTContext {
 	var p = new(PassTContext)
 
-	p.EContext = NewEmptyEContext()
+	InitEmptyEContext(&p.EContext)
 	p.parser = parser
-	p.CopyFrom(ctx.(*EContext))
+	p.CopyAll(ctx.(*EContext))
 
 	return p
 }
@@ -218,7 +254,13 @@ func (s *PassTContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *PassTContext) T() ITContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ITContext)(nil)).Elem(), 0)
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(ITContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
 
 	if t == nil {
 		return nil
@@ -244,10 +286,8 @@ func (p *CalcParser) E() (localctx IEContext) {
 }
 
 func (p *CalcParser) e(_p int) (localctx IEContext) {
-	this := p
-	_ = this
-
 	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+
 	_parentState := p.GetState()
 	localctx = NewEContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IEContext = localctx
@@ -255,22 +295,6 @@ func (p *CalcParser) e(_p int) (localctx IEContext) {
 	_startState := 0
 	p.EnterRecursionRule(localctx, 0, CalcParserRULE_e, _p)
 	var _la int
-
-	defer func() {
-		p.UnrollRecursionContexts(_parentctx)
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
 
 	var _alt int
 
@@ -287,8 +311,13 @@ func (p *CalcParser) e(_p int) (localctx IEContext) {
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
 	p.SetState(14)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 0, p.GetParserRuleContext())
-
+	if p.HasError() {
+		goto errorExit
+	}
+	_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 0, p.GetParserRuleContext())
+	if p.HasError() {
+		goto errorExit
+	}
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
 			if p.GetParseListeners() != nil {
@@ -300,7 +329,8 @@ func (p *CalcParser) e(_p int) (localctx IEContext) {
 			p.SetState(9)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
-				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+				p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+				goto errorExit
 			}
 			{
 				p.SetState(10)
@@ -328,10 +358,26 @@ func (p *CalcParser) e(_p int) (localctx IEContext) {
 		}
 		p.SetState(16)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 0, p.GetParserRuleContext())
+		if p.HasError() {
+			goto errorExit
+		}
+		_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 0, p.GetParserRuleContext())
+		if p.HasError() {
+			goto errorExit
+		}
 	}
 
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.UnrollRecursionContexts(_parentctx)
 	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
 }
 
 // ITContext is an interface to support dynamic dispatch.
@@ -340,21 +386,25 @@ type ITContext interface {
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
-
 	// IsTContext differentiates from other interfaces.
 	IsTContext()
 }
 
 type TContext struct {
-	*antlr.BaseParserRuleContext
+	antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
 func NewEmptyTContext() *TContext {
 	var p = new(TContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
 	p.RuleIndex = CalcParserRULE_t
 	return p
+}
+
+func InitEmptyTContext(p *TContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcParserRULE_t
 }
 
 func (*TContext) IsTContext() {}
@@ -362,7 +412,7 @@ func (*TContext) IsTContext() {}
 func NewTContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *TContext {
 	var p = new(TContext)
 
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
 
 	p.parser = parser
 	p.RuleIndex = CalcParserRULE_t
@@ -372,8 +422,8 @@ func NewTContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingSt
 
 func (s *TContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *TContext) CopyFrom(ctx *TContext) {
-	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
+func (s *TContext) CopyAll(ctx *TContext) {
+	s.CopyFrom(&ctx.BaseParserRuleContext)
 }
 
 func (s *TContext) GetRuleContext() antlr.RuleContext {
@@ -385,15 +435,15 @@ func (s *TContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) stri
 }
 
 type PassFContext struct {
-	*TContext
+	TContext
 }
 
 func NewPassFContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *PassFContext {
 	var p = new(PassFContext)
 
-	p.TContext = NewEmptyTContext()
+	InitEmptyTContext(&p.TContext)
 	p.parser = parser
-	p.CopyFrom(ctx.(*TContext))
+	p.CopyAll(ctx.(*TContext))
 
 	return p
 }
@@ -403,7 +453,13 @@ func (s *PassFContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *PassFContext) F() IFContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IFContext)(nil)).Elem(), 0)
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IFContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
 
 	if t == nil {
 		return nil
@@ -425,16 +481,16 @@ func (s *PassFContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 type MuldivContext struct {
-	*TContext
+	TContext
 	op antlr.Token
 }
 
 func NewMuldivContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *MuldivContext {
 	var p = new(MuldivContext)
 
-	p.TContext = NewEmptyTContext()
+	InitEmptyTContext(&p.TContext)
 	p.parser = parser
-	p.CopyFrom(ctx.(*TContext))
+	p.CopyAll(ctx.(*TContext))
 
 	return p
 }
@@ -448,7 +504,13 @@ func (s *MuldivContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *MuldivContext) T() ITContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ITContext)(nil)).Elem(), 0)
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(ITContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
 
 	if t == nil {
 		return nil
@@ -458,7 +520,13 @@ func (s *MuldivContext) T() ITContext {
 }
 
 func (s *MuldivContext) F() IFContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IFContext)(nil)).Elem(), 0)
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IFContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
 
 	if t == nil {
 		return nil
@@ -484,10 +552,8 @@ func (p *CalcParser) T() (localctx ITContext) {
 }
 
 func (p *CalcParser) t(_p int) (localctx ITContext) {
-	this := p
-	_ = this
-
 	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
+
 	_parentState := p.GetState()
 	localctx = NewTContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx ITContext = localctx
@@ -495,22 +561,6 @@ func (p *CalcParser) t(_p int) (localctx ITContext) {
 	_startState := 2
 	p.EnterRecursionRule(localctx, 2, CalcParserRULE_t, _p)
 	var _la int
-
-	defer func() {
-		p.UnrollRecursionContexts(_parentctx)
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
 
 	var _alt int
 
@@ -527,8 +577,13 @@ func (p *CalcParser) t(_p int) (localctx ITContext) {
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
 	p.SetState(25)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext())
-
+	if p.HasError() {
+		goto errorExit
+	}
+	_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 1, p.GetParserRuleContext())
+	if p.HasError() {
+		goto errorExit
+	}
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
 			if p.GetParseListeners() != nil {
@@ -540,7 +595,8 @@ func (p *CalcParser) t(_p int) (localctx ITContext) {
 			p.SetState(20)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
-				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+				p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
+				goto errorExit
 			}
 			{
 				p.SetState(21)
@@ -568,10 +624,26 @@ func (p *CalcParser) t(_p int) (localctx ITContext) {
 		}
 		p.SetState(27)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext())
+		if p.HasError() {
+			goto errorExit
+		}
+		_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 1, p.GetParserRuleContext())
+		if p.HasError() {
+			goto errorExit
+		}
 	}
 
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.UnrollRecursionContexts(_parentctx)
 	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
 }
 
 // IFContext is an interface to support dynamic dispatch.
@@ -580,21 +652,25 @@ type IFContext interface {
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
-
 	// IsFContext differentiates from other interfaces.
 	IsFContext()
 }
 
 type FContext struct {
-	*antlr.BaseParserRuleContext
+	antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
 func NewEmptyFContext() *FContext {
 	var p = new(FContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
 	p.RuleIndex = CalcParserRULE_f
 	return p
+}
+
+func InitEmptyFContext(p *FContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = CalcParserRULE_f
 }
 
 func (*FContext) IsFContext() {}
@@ -602,7 +678,7 @@ func (*FContext) IsFContext() {}
 func NewFContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *FContext {
 	var p = new(FContext)
 
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
 
 	p.parser = parser
 	p.RuleIndex = CalcParserRULE_f
@@ -612,8 +688,8 @@ func NewFContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingSt
 
 func (s *FContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *FContext) CopyFrom(ctx *FContext) {
-	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
+func (s *FContext) CopyAll(ctx *FContext) {
+	s.CopyFrom(&ctx.BaseParserRuleContext)
 }
 
 func (s *FContext) GetRuleContext() antlr.RuleContext {
@@ -625,15 +701,15 @@ func (s *FContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) stri
 }
 
 type PassEContext struct {
-	*FContext
+	FContext
 }
 
 func NewPassEContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *PassEContext {
 	var p = new(PassEContext)
 
-	p.FContext = NewEmptyFContext()
+	InitEmptyFContext(&p.FContext)
 	p.parser = parser
-	p.CopyFrom(ctx.(*FContext))
+	p.CopyAll(ctx.(*FContext))
 
 	return p
 }
@@ -643,7 +719,13 @@ func (s *PassEContext) GetRuleContext() antlr.RuleContext {
 }
 
 func (s *PassEContext) E() IEContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEContext)(nil)).Elem(), 0)
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IEContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
 
 	if t == nil {
 		return nil
@@ -665,15 +747,15 @@ func (s *PassEContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 type NumContext struct {
-	*FContext
+	FContext
 }
 
 func NewNumContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NumContext {
 	var p = new(NumContext)
 
-	p.FContext = NewEmptyFContext()
+	InitEmptyFContext(&p.FContext)
 	p.parser = parser
-	p.CopyFrom(ctx.(*FContext))
+	p.CopyAll(ctx.(*FContext))
 
 	return p
 }
@@ -699,15 +781,15 @@ func (s *NumContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 type IdContext struct {
-	*FContext
+	FContext
 }
 
 func NewIdContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *IdContext {
 	var p = new(IdContext)
 
-	p.FContext = NewEmptyFContext()
+	InitEmptyFContext(&p.FContext)
 	p.parser = parser
-	p.CopyFrom(ctx.(*FContext))
+	p.CopyAll(ctx.(*FContext))
 
 	return p
 }
@@ -733,30 +815,13 @@ func (s *IdContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 func (p *CalcParser) F() (localctx IFContext) {
-	this := p
-	_ = this
-
 	localctx = NewFContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 4, CalcParserRULE_f)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
 	p.SetState(34)
 	p.GetErrorHandler().Sync(p)
+	if p.HasError() {
+		goto errorExit
+	}
 
 	switch p.GetTokenStream().LA(1) {
 	case CalcParserT__4:
@@ -765,6 +830,10 @@ func (p *CalcParser) F() (localctx IFContext) {
 		{
 			p.SetState(28)
 			p.Match(CalcParserT__4)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
 		}
 		{
 			p.SetState(29)
@@ -773,6 +842,10 @@ func (p *CalcParser) F() (localctx IFContext) {
 		{
 			p.SetState(30)
 			p.Match(CalcParserT__5)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
 		}
 
 	case CalcParserID:
@@ -781,6 +854,10 @@ func (p *CalcParser) F() (localctx IFContext) {
 		{
 			p.SetState(32)
 			p.Match(CalcParserID)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
 		}
 
 	case CalcParserNUM:
@@ -789,13 +866,28 @@ func (p *CalcParser) F() (localctx IFContext) {
 		{
 			p.SetState(33)
 			p.Match(CalcParserNUM)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
 		}
 
 	default:
-		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+		p.SetError(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+		goto errorExit
 	}
 
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
 	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
 }
 
 func (p *CalcParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
@@ -820,9 +912,6 @@ func (p *CalcParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex in
 }
 
 func (p *CalcParser) E_Sempred(localctx antlr.RuleContext, predIndex int) bool {
-	this := p
-	_ = this
-
 	switch predIndex {
 	case 0:
 		return p.Precpred(p.GetParserRuleContext(), 2)
@@ -833,9 +922,6 @@ func (p *CalcParser) E_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 }
 
 func (p *CalcParser) T_Sempred(localctx antlr.RuleContext, predIndex int) bool {
-	this := p
-	_ = this
-
 	switch predIndex {
 	case 1:
 		return p.Precpred(p.GetParserRuleContext(), 2)

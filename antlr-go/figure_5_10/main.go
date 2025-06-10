@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"parser"
+	"figure_5_10/parser"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr4-go/antlr/v4"
 )
 
 var id int = 0
