@@ -1,4 +1,4 @@
-module figure_5_10
+module Calc
 
 go 1.24.4
 
