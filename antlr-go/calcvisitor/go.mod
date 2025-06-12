@@ -1,8 +1,7 @@
-module main
+module calcvisitor
 
-go 1.17
+go 1.24.4
 
-require github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220209173558-ad29539cd2e9
+require github.com/antlr4-go/antlr/v4 v4.13.1
 
-require parser v1.0.0
-replace parser v1.0.0 => ./parser
+require golang.org/x/exp v0.0.0-20240506185415-9bf2ced13842 // indirect

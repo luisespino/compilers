@@ -1,8 +1,8 @@
-// Code generated from Calc.g4 by ANTLR 4.9.3. DO NOT EDIT.
+// Code generated from Calc.g4 by ANTLR 4.13.2. DO NOT EDIT.
 
 package parser // Calc
 
-import "github.com/antlr/antlr4/runtime/Go/antlr"
+import "github.com/antlr4-go/antlr/v4"
 
 // A complete Visitor for a parse tree produced by CalcParser.
 type CalcVisitor interface {

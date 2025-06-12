@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
-	"parser"
+	"calcvisitor/parser"
 	"strconv"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr4-go/antlr/v4"
 )
 
 type Visitor struct {
 	parser.CalcVisitor
+	stackop string
 }
 
-func (v *Visitor) Visit(tree antlr.ParseTree) float64 {
+func (v *Visitor) Visit(tree antlr.ParseTree) int64 {
 	switch val := tree.(type) {
 	case *parser.OpContext:
 		return v.VisitOp(val)
@@ -25,11 +26,11 @@ func (v *Visitor) Visit(tree antlr.ParseTree) float64 {
 	}
 }
 
-func (v *Visitor) VisitOp(ctx *parser.OpContext) float64 {
+func (v *Visitor) VisitOp(ctx *parser.OpContext) int64 {
 	l := v.Visit(ctx.GetLeft())
 	r := v.Visit(ctx.GetRight())
 	op := ctx.GetOp().GetText()
-	fmt.Println("op", op)
+	v.stackop += "- Visit Op "+op+" ~ Two pop an apply "+op+"\n"
 	switch op {
 	case "+":
 		return l + r
@@ -43,14 +44,13 @@ func (v *Visitor) VisitOp(ctx *parser.OpContext) float64 {
 	return 0
 }
 
-func (v *Visitor) VisitDigit(ctx *parser.DigitContext) float64 {
-	fmt.Println("digit", ctx.GetText())
-	i1, _ := strconv.ParseFloat(ctx.GetText(), 64)
+func (v *Visitor) VisitDigit(ctx *parser.DigitContext) int64 {
+	v.stackop  += "- Visit Digit " + ctx.GetText() + " ~ Push " + ctx.GetText() + "\n"
+	i1, _ := strconv.ParseInt(ctx.GetText(), 10, 64)
 	return i1
 }
 
-func (v *Visitor) VisitParen(ctx *parser.ParenContext) float64 {
-	fmt.Println("parent", ctx.GetText())
+func (v *Visitor) VisitParen(ctx *parser.ParenContext) int64 {
 	tar := v.Visit(ctx.Expr())
 	return tar
 }
@@ -64,6 +64,8 @@ func main() {
 	p.BuildParseTrees = true
 	tree := p.Expr()
 	var visitor = Visitor{}
+	visitor.stackop = "";
 	var result = visitor.Visit(tree)
-	fmt.Println(expression, "=", result)
+	fmt.Println("Visitor call stack:\n" + visitor.stackop)
+	fmt.Println("Evaluation:", expression, "=", result)
 }
