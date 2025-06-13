@@ -177,6 +177,7 @@ func main() {
 		println(b)
 		b = b + 1
 	}`
+	fmt.Println("INPUT CODE:"+prog)
 	input := antlr.NewInputStream(prog)
 	lexer := parser.NewControlLexer(input)
 	tokens := antlr.NewCommonTokenStream(lexer, 0)
@@ -184,5 +185,6 @@ func main() {
 	p.BuildParseTrees = true
 	tree := p.Prog()
 	eval := Visitor{memory: make(map[string]Value)}
+	fmt.Println("\nINTERPRETATION:")
 	eval.Visit(tree)
 }
