@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	"parser"
+	"control/parser"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr4-go/antlr/v4"
 )
 
 type Value struct {
@@ -175,7 +175,7 @@ func main() {
 	}
 	while (b < 5) {
 		println(b)
-		b = b + 2
+		b = b + 1
 	}`
 	input := antlr.NewInputStream(prog)
 	lexer := parser.NewControlLexer(input)

@@ -1,8 +1,8 @@
-// Code generated from Control.g4 by ANTLR 4.9.3. DO NOT EDIT.
+// Code generated from Control.g4 by ANTLR 4.13.2. DO NOT EDIT.
 
 package parser // Control
 
-import "github.com/antlr/antlr4/runtime/Go/antlr"
+import "github.com/antlr4-go/antlr/v4"
 
 type BaseControlVisitor struct {
 	*antlr.BaseParseTreeVisitor
