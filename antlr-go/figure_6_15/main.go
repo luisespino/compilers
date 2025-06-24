@@ -40,7 +40,7 @@ func (t *Translator) VisitProgram(ctx *parser.ProgramContext) interface{} {
     for _, stmt := range ctx.AllStmt() {
 		stmt.Accept(t)
     }
-    t.Text += "\tmov X8, #93\n\tsvc #0\n"
+    t.Text += "\tmov x8, #93\n\tsvc #0\n"
     return Attr{
         Str: t.Data + t.Text,
         Obj: nil,
@@ -68,7 +68,7 @@ func (t *Translator) VisitDeclExpr(ctx *parser.DeclExprContext) interface{} {
 	
     flat := flattenArray(expr)
 
-    t.Data += name + ": .word "
+    t.Data += name + ": .dword "
 	nums := strings.Join(flat, ", ")
 	if nums == "" {
 		t.Data += "0\n"
@@ -77,18 +77,97 @@ func (t *Translator) VisitDeclExpr(ctx *parser.DeclExprContext) interface{} {
 	}
 
 	if len(dimensions) == 1 {
-		t.Data += name + "_cols: .word " + fmt.Sprint(dimensions[0]) + "\n"
+		t.Data += name + "_cols: .dword " + fmt.Sprint(dimensions[0]) + "\n"
 	} else if len(dimensions) == 2 {
-		t.Data += name + "_rows: .word " + fmt.Sprint(dimensions[0]) + "\n"
-		t.Data += name + "_cols: .word " + fmt.Sprint(dimensions[1]) + "\n"
+		t.Data += name + "_rows: .dword " + fmt.Sprint(dimensions[0]) + "\n"
+		t.Data += name + "_cols: .dword " + fmt.Sprint(dimensions[1]) + "\n"
 	} else if len(dimensions) == 3 {
-		t.Data += name + "_face: .word " + fmt.Sprint(dimensions[0]) + "\n"
-		t.Data += name + "_rows: .word " + fmt.Sprint(dimensions[1]) + "\n"
-		t.Data += name + "_cols: .word " + fmt.Sprint(dimensions[2]) + "\n"
+		t.Data += name + "_face: .dword " + fmt.Sprint(dimensions[0]) + "\n"
+		t.Data += name + "_rows: .dword " + fmt.Sprint(dimensions[1]) + "\n"
+		t.Data += name + "_cols: .dword " + fmt.Sprint(dimensions[2]) + "\n"
 	}
 
     return Attr{}
 }
+
+func (t *Translator) VisitAssgArray(ctx *parser.AssgArrayContext) interface{} {
+	dest := ctx.Var_(0).GetText()
+	src := ctx.Var_(1).GetText()
+	indexIface := ctx.Index().Accept(t)
+	indices := indexIface.([]string)
+
+	srcVar := t.Variables[src]
+	dimensions := getDimensions(srcVar.Expression)
+
+	if len(dimensions) == 1 {
+		t.Text += fmt.Sprintf("\tmov x0, #%s\n", indices[0])
+		t.Text += "\tmov x1, #8\n"
+		t.Text += "\tmul x0, x0, x1\n"
+		t.Text += fmt.Sprintf("\tldr x1, =%s\n", src)
+		t.Text += "\tadd x2, x1, x0\n"
+		t.Text += fmt.Sprintf("\tldr x0, =%s\n", dest)
+		t.Text += "\tldr x1, [x2]\n"
+		t.Text += "\tstr x1, [x0]\n\n"
+
+	} else if len(dimensions) == 2 {
+		t.Text += fmt.Sprintf("\tmov x0, #%s\n", indices[0])
+		t.Text += "\tmov x1, #8\n"
+		t.Text += "\tmul x0, x0, x1\n"
+		t.Text += fmt.Sprintf("\tmov x1, #%s\n", indices[1])
+		t.Text += "\tmov x2, #8\n"
+		t.Text += "\tmul x1, x1, x2\n"
+		t.Text += fmt.Sprintf("\tldr x2, =%s_cols\n", src)
+        t.Text += "\tldr x2, [x2]\n"
+		t.Text += "\tmul x3, x0, x2\n"
+		t.Text += "\tadd x3, x3, x1\n"
+		t.Text += fmt.Sprintf("\tldr x4, =%s\n", src)
+		t.Text += "\tadd x4, x4, x3\n"
+		t.Text += fmt.Sprintf("\tldr x0, =%s\n", dest)
+		t.Text += "\tldr x1, [x4]\n"
+		t.Text += "\tstr x1, [x0]\n\n"
+
+	} else if len(dimensions) == 3 {
+		t.Text += fmt.Sprintf("\tmov x0, #%s\n", indices[0])
+		t.Text += "\tmov x1, #8\n"
+		t.Text += "\tmul x0, x0, x1\n"
+		t.Text += fmt.Sprintf("\tmov x1, #%s\n", indices[1])
+		t.Text += "\tmov x2, #8\n"
+		t.Text += "\tmul x1, x1, x2\n"
+		t.Text += fmt.Sprintf("\tmov x2, #%s\n", indices[2])
+		t.Text += "\tmov x3, #8\n"
+		t.Text += "\tmul x2, x2, x3\n"
+		t.Text += fmt.Sprintf("\tldr x3, =%s_rows\n", src)
+        t.Text += "\tldr x3, [x3]\n"
+		t.Text += "\tmul x4, x3, x0\n"
+		t.Text += "\tadd x4, x4, x1\n"
+		t.Text += fmt.Sprintf("\tldr x5, =%s_cols\n", src)
+        t.Text += "\tldr x5, [x5]\n"
+		t.Text += "\tmul x6, x5, x4\n"
+		t.Text += "\tadd x6, x6, x2\n"
+		t.Text += fmt.Sprintf("\tldr x0, =%s\n", src)
+		t.Text += "\tadd x0, x0, x6\n"
+		t.Text += fmt.Sprintf("\tldr x1, =%s\n", dest)
+		t.Text += "\tldr x2, [x0]\n"
+		t.Text += "\tstr x2, [x1]\n\n"
+	}
+
+	return Attr{}
+}
+
+func (t *Translator) VisitIndexMany(ctx *parser.IndexManyContext) interface{} {
+	val := ctx.Val().GetText()
+	rest := ctx.Index().Accept(t).([]string)
+	return append([]string{val}, rest...)
+}
+
+func (t *Translator) VisitIndexOne(ctx *parser.IndexOneContext) interface{} {
+	return []string{ctx.Val().GetText()}
+}
+
+func (t *Translator) VisitIndex(ctx *parser.IndexContext) interface{} {
+	return ctx.Accept(t)
+}
+
 
 func (t *Translator) VisitDeclVal(ctx *parser.DeclValContext) interface{} {
     name := ctx.Var_().GetText()
@@ -98,7 +177,7 @@ func (t *Translator) VisitDeclVal(ctx *parser.DeclValContext) interface{} {
 
     t.Variables[name] = Variable{name, expr, typ}
 
-	t.Data += name + ": .word "+expr+"\n"
+	t.Data += name + ": .dword "+expr+"\n"
 
 
     return Attr{}
