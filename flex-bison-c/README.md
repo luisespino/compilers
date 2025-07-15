@@ -48,6 +48,7 @@ gcc app.c -o app $(pkg-config --cflags --libs gtk+-3.0)
 ```
 
 The application will look like this:
+
 ![Alt text](app/run.png)
 
 
