@@ -1,0 +1,12 @@
+digraph AST {
+    node [shape=ellipse];
+    5 [label="+"];
+    6 [label="1"];
+    7 [label="*"];
+    8 [label="2"];
+    9 [label="3"];
+    7 -> 8;
+    7 -> 9;
+    5 -> 6;
+    5 -> 7;
+}
