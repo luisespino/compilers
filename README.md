@@ -7,10 +7,9 @@ ANTLR, Bison, Jison, PeggyJS, and PLY Examples
 
 ### Programming Languages Usage Ranking
 
-<p align="center">
-  <img src="lang.png" width="450" alt="Languages" />
-</p>
-
+<div style="width: 100%;text-align: center;">
+  <img src="https://kunusoft.com/lang.php?repo=compilers" alt="Stats">
+</div>
 
 ### References
 
