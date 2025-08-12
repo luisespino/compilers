@@ -19,7 +19,7 @@ int yylval;
 
 %%
 input:
-    /* vacío */
+    /* empty */
   | input expr '\n' { printf("%d\n", $2); }
   | input error '\n' { yyerrok; }   
   ;
@@ -34,7 +34,7 @@ expr:
 
 int yylex() {
     int c;
-    while ((c = getchar()) == ' ' || c == '\t');  // saltar espacios
+    while ((c = getchar()) == ' ' || c == '\t'); 
 
     if (c == EOF) return 0;
 
@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        size = temp_size;  // Solo aquí lo asignas si es válido
+        size = temp_size; 
     }
 
     printf("Size: %dx%d\n", size, size);
