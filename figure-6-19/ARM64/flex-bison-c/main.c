@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h> 
 #include <string.h> 
+#include "symbol.h"
+#include "common.h"
 
 extern int yyparse(void);
 extern void yy_scan_string(const char *);
@@ -9,7 +11,12 @@ extern void yy_scan_string(const char *);
 int main(void) {
     char input[1024];
 
+    if (!symbol_table_create(10)) {
+        return 1;
+    }    
+
     while (true) {
+        temp = 1;
         printf("Enter expression:\n");
 
         if (!fgets(input, sizeof(input), stdin))

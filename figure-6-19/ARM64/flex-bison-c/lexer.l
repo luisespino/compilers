@@ -1,5 +1,6 @@
 %{
-#include "attr.h"
+#include "symbol.h"
+#include "common.h"
 #include "parser.tab.h"
 %}
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 bison -d parser.y
 flex lexer.l
-gcc -o run parser.tab.c lex.yy.c main.c -lfl
+gcc -o run parser.tab.c lex.yy.c main.c common.c symbol.c -lfl
 ./run
 rm parser.tab.c parser.tab.h lex.yy.c run
